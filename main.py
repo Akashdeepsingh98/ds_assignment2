@@ -1,5 +1,6 @@
 import resource
 import sys
+import heapq
 
 
 def limit_memory(memlimit):
@@ -39,7 +40,7 @@ def radix_sort(l, sorttype):
 
 def big_merge_sort(input_fn, output_fn, partsize, sorttype='asc'):
     input_file = open(input_fn, 'r')
-    out_filenum = 0
+    intermed_fnum = 0
     canread = True
     while canread:
         lines = []
@@ -54,10 +55,17 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype='asc'):
 
         radix_sort(lines, sorttype)
 
-        outputfile = open(output_fn+str(out_filenum), 'w')
-        outputfile.writelines(lines)
-        outputfile.close()
+        intermedfile = open('intermed'+str(intermed_fnum)+'.txt', 'w')
+        intermed_fnum+=1
+        for i in range(len(lines)):
+            lines[i] = '  '.join([ele for ele in lines[i]])
+            lines[i] += '\n'
+        intermedfile.writelines(lines)
+        intermedfile.close()
     input_file.close()
+
+    output_file = open(output_fn, 'w')
+    
 
 
 def main():
