@@ -27,8 +27,37 @@ def get_data(input_fn):
         for col in data.keys():
             data[col].append(row[j])
             j += 1
-    
+
     return data
+
+
+def radix_sort(l, sorttype):
+    for i in range(len(l[0])):
+        sorted(l, key=lambda x: x[len(l[0])-i-1],
+               reverse=True if sorttype == 'desc' else False)
+
+
+def big_merge_sort(input_fn, output_fn, partsize, sorttype='asc'):
+    input_file = open(input_fn, 'r')
+    out_filenum = 0
+    canread = True
+    while canread:
+        lines = []
+
+        for i in range(partsize):
+            t = input_file.readline()
+            if not t:
+                canread = False
+                break
+            t = t.strip().split('  ')
+            lines.append(t)
+
+        radix_sort(lines, sorttype)
+
+        outputfile = open(output_fn+str(out_filenum), 'w')
+        outputfile.writelines(lines)
+        outputfile.close()
+    input_file.close()
 
 
 def main():
@@ -42,8 +71,9 @@ def main():
         user_cols.append(sys.argv[i])
     limit_memory(memlimit)
 
-    data = get_data(input_file)
-    print(data)
+    #data = get_data(input_file)
+    partsize = 1000
+    big_merge_sort(input_file, output_file, partsize, sorttype)
 
 
 if __name__ == '__main__':
