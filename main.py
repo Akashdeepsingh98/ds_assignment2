@@ -52,12 +52,7 @@ def radix_sort2(l, sorttype):
         if sorttype == 'asc':
             l.sort(key=lambda x: x[2][length-i-1])
         else:
-            try:
-                l.sort(key=lambda x: x[2][length-i-1], reverse=True)
-            except:
-                pass
-            #    pp.pprint(l)
-
+            l.sort(key=lambda x: x[2][length-i-1], reverse=True)
 
 def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
     input_file = open(input_fn, 'r')
@@ -72,12 +67,10 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
                 canread = False
                 break
 
-            # t = t.rstrip()  # remove end whitespaces
             rowlist = []  # list of elements in the row
             index = 0  # cuurent index at t
             if t[-1] == '\n':
                 t = t[:-1]
-                # print(t)
 
             for col in allcols:  # go through all columns
                 colname = col[0]  # name of current column
@@ -101,7 +94,7 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
                 lines[i] += '\n'
             intermedfile.writelines(lines)
             intermedfile.close()
-            
+
     input_file.close()
 
     output_file = open(output_fn, 'w')
@@ -137,7 +130,7 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
         newline = intermedfile.readline()
         for i in range(toplinenum+1):
             newline = intermedfile.readline()
-        
+
         if newline:
             rowlist = []
             index = 0
@@ -153,7 +146,6 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
                         index += 1
                     index += 2
                     rowlist.append(colstr)
-
 
             fileheap[0][2] = rowlist
             fileheap[0][1] = toplinenum+1
@@ -171,7 +163,7 @@ def main():
     n_args = len(sys.argv)
     input_file = sys.argv[1]
     output_file = sys.argv[2]
-    memlimit = int(sys.argv[3])
+    memlimit = int(sys.argv[3]) * 1024 * 1024
     sorttype = sys.argv[4]
     user_cols = []
     for i in range(5, n_args):
@@ -191,7 +183,7 @@ def main():
         colind += 1
 
     #data = get_data(input_file)
-    partsize = 100
+    partsize = 1000
     big_merge_sort(input_file, output_file, partsize,
                    sorttype, allcols, user_cols)
 
