@@ -1,6 +1,7 @@
 import resource
 import sys
 import pprint
+
 pp = pprint.PrettyPrinter(indent=4)
 
 
@@ -186,7 +187,6 @@ def main():
     partsize = 1000
     big_merge_sort(input_file, output_file, partsize,
                    sorttype, allcols, user_cols)
-
 
 if __name__ == '__main__':
     main()
