@@ -59,6 +59,7 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
     input_file = open(input_fn, 'r')
     intermed_fnum = 0
     canread = True
+    print('##running Phase-1')
     while canread:
         lines = []
 
@@ -85,9 +86,11 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
                     rowlist.append(colstr)
             lines.append(rowlist)
 
+        print('sorting #{} sublist'.format(intermed_fnum+1))
         radix_sort(lines, sorttype)
 
         if len(lines) > 0:
+            print('Writing to disk #{}'.format(intermed_fnum+1))
             intermedfile = open('intermed'+str(intermed_fnum)+'.txt', 'w')
             intermed_fnum += 1
             for i in range(len(lines)):
@@ -98,6 +101,8 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
 
     input_file.close()
 
+    print('##running phase-2')
+    print('Sorting...')
     output_file = open(output_fn, 'w')
     fileheap = []
     for i in range(intermed_fnum):
@@ -121,6 +126,7 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
         intermedfile.close()
 
     radix_sort2(fileheap, sorttype)
+    print('Writing to disk')
     intermedsdone = 0
     while intermedsdone < intermed_fnum:
         top = fileheap[0]
@@ -158,9 +164,11 @@ def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
         intermedfile.close()
 
     output_file.close()
+    print('###completed execution')
 
 
 def main():
+    print('###start execution')
     n_args = len(sys.argv)
     input_file = sys.argv[1]
     output_file = sys.argv[2]
