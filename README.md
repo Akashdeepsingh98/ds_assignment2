@@ -1,7 +1,15 @@
-Let us start.
-Important links:
-- https://docs.python.org/3/library/resource.html
-- https://www.geeksforgeeks.org/python-how-to-put-limits-on-memory-and-cpu-usage/
-- https://www.tutorialspoint.com/python/python_command_line_arguments.htm
-- https://www.geeksforgeeks.org/command-line-arguments-in-python/
-- https://www.geeksforgeeks.org/external-sorting/
+# Data Systems Assignment 2 - Two-phase merge sort
+## Name - Akashdeep Singh
+## Roll No - 2020201051
+
+***
+
+## Basic Single Threaded Code
+- This is the only version I could do.
+- Using `Python 3`.
+- Command example:
+<br>
+`python main.py input.txt output.txt 50 asc C1 C2`
+
+## Multi Threaded Code
+- `Not done`.

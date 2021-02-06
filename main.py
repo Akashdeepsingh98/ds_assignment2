@@ -55,6 +55,7 @@ def radix_sort2(l, sorttype):
         else:
             l.sort(key=lambda x: x[2][length-i-1], reverse=True)
 
+
 def big_merge_sort(input_fn, output_fn, partsize, sorttype, allcols, user_cols):
     input_file = open(input_fn, 'r')
     intermed_fnum = 0
@@ -195,6 +196,7 @@ def main():
     partsize = 1000
     big_merge_sort(input_file, output_file, partsize,
                    sorttype, allcols, user_cols)
+
 
 if __name__ == '__main__':
     main()
